@@ -13,7 +13,7 @@ export const RegisterForm = () => {
         dateOfBirth:'',
         sex:'',
         province:'',
-        account:'',
+        accountPublic:false,
         password1:'',
         password2:''
     })
@@ -32,11 +32,21 @@ export const RegisterForm = () => {
 
     return(
         <>
-            <form onSubmit={sendRegisterForm}>
-                <div className="register-form">
+            <form className="register-form" onSubmit={sendRegisterForm}>
+                <div className="register-form__box">
                     <FormInputPart name="nick" changeHandle={changedHandle} placeholder={"Your name in application"} />
                     <FormInputPart name="name" changeHandle={changedHandle} placeholder={'Your real name'} />
                     <FormInputPart name="email" changeHandle={changedHandle} placeholder={"Your email"} />
+                    <FormInputPart name="dataOfBirth" changeHandle={changedHandle} placeholder={"Your name in application"} />
+                    <FormInputPart name="sex" changeHandle={changedHandle} placeholder={'Your real name'} />
+
+                    <FormInputPart name="province" changeHandle={changedHandle} placeholder={"Your email"} />
+
+                    <FormInputPart name="accountPublic" changeHandle={changedHandle} placeholder={"Your name in application"} />
+                    <FormInputPart name="password1" changeHandle={changedHandle} placeholder={'Your real name'} />
+                    <FormInputPart name="password2" changeHandle={changedHandle} placeholder={"Your email"} />
+
+                    <button className="register-form-box__button" type="submit">Register</button>
                 </div>
             </form>
 
