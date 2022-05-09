@@ -1,0 +1,25 @@
+@import "../../Assets/cssVariable";
+
+
+.footer{
+  height: 10vh;
+  width: 100vw;
+  font-weight: bold;
+  text-align: center;
+  line-height: 10vh;
+}
+
+// mobile device
+@media (max-width: 480px) {
+  .footer{
+    background-color: $greenColor;
+  }
+}
+
+// desktop device
+@media (min-width: 481px) {
+  .footer{
+    background-color: $redColor;
+  }
+}
+

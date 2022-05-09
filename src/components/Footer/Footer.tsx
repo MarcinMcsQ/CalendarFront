@@ -1,9 +1,10 @@
 import React from "react";
+import "./Footer.scss"
 
 export const Footer = () => (
     <>
         <div className="footer">
-            <h1>Calendar by ProgrammerOnKox </h1>
+            <p>Calendar by ProgrammerOnKox ©</p>
         </div>
     </>
 )
