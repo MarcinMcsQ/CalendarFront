@@ -1,0 +1,37 @@
+@import "../../Assets/cssVariable";
+
+.form-input-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 45%;
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+
+  input {
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid $underLine;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  p {
+    width: 80%;
+    margin: 0;
+    border: none;
+    font-weight: lighter;
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px){
+  .form-input-part p {
+    font-size: 12px;
+  }
+}
