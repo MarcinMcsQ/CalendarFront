@@ -2,6 +2,7 @@ import React from "react";
 import "./FormSelectPart.scss"
 
 type Props = {
+    value:string;
     name: string;
     options: string[];
     changeHandle: React.ChangeEventHandler<HTMLSelectElement>
@@ -12,14 +13,16 @@ type Props = {
 
 export const FormSelectPart = (props: Props) => {
 
-    const options = [<option value="select">select...</option>]
+    const options = [<option key="-1" value="select">select...</option>]
 
     for (let i = 0; i < props.options.length; i++) {
         options.push(<option key={i} value={props.options[i]}>{props.options[i]}</option>);
     }
-
     return (
-        <div className="form-select-part">
+        <div className="form-select-part"
+             style={props.value !== 'select' && props.value !== '' ?
+                   (props.correct ? {backgroundColor: 'green'} : {backgroundColor: 'red'})
+                                  : {backgroundColor: "transparent"}}>
             <div className="form-select-part__box">
                 <p className="form-select-part-box__p">{props.placeholder}</p>
                 <select className="form-select-part-box__select" name={props.name} onChange={props.changeHandle}>{options}</select>

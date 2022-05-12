@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {RegisterFormUserData} from "types";
+import {validateRegisterRule} from "../../../components/RegisterForm/ValidateRegisterRule";
 
-export const useRegisterForm = (validateCallback: (value: boolean | string | number) => {errorMessage:string,correct:boolean}) =>
+export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: any, callbackMessage: any) => void) =>
 {
     const [message, setMessage] = useState({
         nick: '',
@@ -32,7 +33,7 @@ export const useRegisterForm = (validateCallback: (value: boolean | string | num
         dateOfBirth: '',
         sex: '',
         province: '',
-        accountPublic: false,
+        accountPublic: '',
         password1: '',
         password2: ''
     })
@@ -45,6 +46,7 @@ export const useRegisterForm = (validateCallback: (value: boolean | string | num
         }));
     };
 
+    validateRegisterRule(registerFormData , setCorrect , setMessage  )
     return {
         helpMessage: message,
         correct: correct,

@@ -5,12 +5,12 @@ import {useRegisterForm} from "../../Services/utils/helpedHook/useRegisterForm";
 import {FormSelectPart} from "../FormSelectPart/FormSelectPart";
 import {validateRegisterRule} from "./ValidateRegisterRule";
 
-interface  UseRegisterForm{
-    helpMessage: string,
-    correct: boolean,
-    registerFormData: string[],
-    setRegisterFormData: ()=>{}
-}
+// interface  UseRegisterForm{
+//     helpMessage: string,
+//     correct: boolean,
+//     registerFormData: string[],
+//     setRegisterFormData: ()=>{}
+// }
 
 export const RegisterForm = () => {
     const {helpMessage, correct, registerFormData, setRegisterFormData} = useRegisterForm(validateRegisterRule) ;
@@ -63,22 +63,25 @@ export const RegisterForm = () => {
                         name={'sex'}
                         options={optionsSexSelect}
                         changeHandle={setRegisterFormData}
+                        value={registerFormData.sex}
                         helpMessage={helpMessage.sex}
                         correct={correct.sex}
                         placeholder={"Select sex:"}
                     />
                     <FormSelectPart
-                        name={'province'}
+                        name={'accountPublic'}
                         options={optionsAccountSelect}
                         changeHandle={setRegisterFormData}
-                        helpMessage={helpMessage.province}
-                        correct={correct.province}
+                        value={registerFormData.accountPublic}
+                        helpMessage={helpMessage.accountPublic}
+                        correct={correct.accountPublic}
                         placeholder={"Select account options:"}
                     />
                     <FormSelectPart
                         name={'province'}
                         options={optionsProvinceSelect}
                         changeHandle={setRegisterFormData}
+                        value={registerFormData.province}
                         helpMessage={helpMessage.province}
                         correct={correct.province}
                         placeholder={"Select province:"}

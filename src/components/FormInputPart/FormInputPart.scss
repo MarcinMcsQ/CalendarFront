@@ -31,7 +31,11 @@
   }
 }
 @media (max-width: 480px){
-  .form-input-part p {
-    font-size: 12px;
+  .form-input-part{
+    width: 90%;
+    & p {
+      font-size: 12px;
+    }
   }
+
 }
