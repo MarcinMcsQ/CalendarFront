@@ -17,7 +17,7 @@ export const FormInputPart = (props: Props) => {
     return (
         <div className="form-input-part"
              style={props.value ?
-                 (props.correct ? {backgroundColor: 'green'} : {backgroundColor: 'red'})
+                 (props.correct ? {backgroundColor: 'yellowgreen'} : {backgroundColor: 'indianred'})
                                 : {backgroundColor: "transparent"}}>
             <input
                 name={props.name}

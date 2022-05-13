@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {RegisterFormUserData} from "types";
+import {RegisterFormDataCorrect, RegisterFormDataHelpMessage, RegisterFormUserData} from "types";
 import {validateRegisterRule} from "../../../components/RegisterForm/ValidateRegisterRule";
 
-export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: any, callbackMessage: any) => void) =>
+export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>, callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>>) => void) =>
 {
     const [message, setMessage] = useState({
         nick: '',
@@ -46,7 +46,10 @@ export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, c
         }));
     };
 
-    validateRegisterRule(registerFormData , setCorrect , setMessage  )
+    useEffect(()=>{
+        validateRegisterRule(registerFormData , setCorrect , setMessage  )
+    },[registerFormData])
+
     return {
         helpMessage: message,
         correct: correct,
