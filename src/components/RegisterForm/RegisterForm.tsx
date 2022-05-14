@@ -5,27 +5,21 @@ import {useRegisterForm} from "../../Services/utils/helpedHook/useRegisterForm";
 import {FormSelectPart} from "../FormSelectPart/FormSelectPart";
 import {validateRegisterRule} from "./ValidateRegisterRule";
 
-// interface  UseRegisterForm{
-//     helpMessage: string,
-//     correct: boolean,
-//     registerFormData: string[],
-//     setRegisterFormData: ()=>{}
-// }
+export const optionsProvinceSelect = ['dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie', 'zachodniopomorskie'];
+export const optionsSexSelect = ['male', 'female'];
+export const optionsAccountSelect = ['public', 'private'];
 
 export const RegisterForm = () => {
     const {helpMessage, correct, registerFormData, setRegisterFormData} = useRegisterForm(validateRegisterRule) ;
-    const optionsSexSelect = ['male', 'female'];
-    const optionsProvinceSelect = ['dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie', 'zachodniopomorskie'];
-    const optionsAccountSelect = ['public', 'private'];
 
     const sendRegisterForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     };
 
-
     return (
         <>
             <form className="register-form" onSubmit={sendRegisterForm}>
+                <h2>Register form</h2>
                 <div className="register-form__box">
                     <FormInputPart
                         name="nick"

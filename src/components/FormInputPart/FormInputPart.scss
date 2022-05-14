@@ -10,8 +10,10 @@
   padding: 5px;
   border: 1px solid $borderColor;
   border-radius: 10px;
+  transition: 0.5s;
 
   input {
+    background-color: transparent;
     width: 80%;
     border: none;
     border-bottom: 1px solid $underLine;
@@ -26,10 +28,19 @@
     width: 80%;
     margin: 0;
     border: none;
-    font-weight: lighter;
-    font-size: 16px;
+    font-size: 12px;
+    text-align: center;
+
   }
 }
+
+.form-input-part--correct{
+  background-color: $inputCorrectColor;
+}
+.form-input-part--incorrect{
+  background-color: $inputIncorrectColor;
+}
+
 @media (max-width: 480px){
   .form-input-part{
     width: 90%;

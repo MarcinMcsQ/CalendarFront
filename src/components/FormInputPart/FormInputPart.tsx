@@ -13,12 +13,9 @@ type Props = {
 
 export const FormInputPart = (props: Props) => {
 
-
     return (
-        <div className="form-input-part"
-             style={props.value ?
-                 (props.correct ? {backgroundColor: 'yellowgreen'} : {backgroundColor: 'indianred'})
-                                : {backgroundColor: "transparent"}}>
+        <div className={`form-input-part ${props.value !== 'select' && props.value !== '' ?
+            (props.correct ? "form-input-part--correct" : "form-input-part--incorrect") : ""}`}>
             <input
                 name={props.name}
                 onChange={props.changeHandle}
