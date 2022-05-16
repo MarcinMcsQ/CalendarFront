@@ -1,9 +1,10 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import "./RegisterForm.scss"
-import {FormInputPart} from "../FormInputPart/FormInputPart";
-import {useRegisterForm} from "../../Services/utils/helpedHook/useRegisterForm";
-import {FormSelectPart} from "../FormSelectPart/FormSelectPart";
+import {FormInputPart} from "../common/FormInputPart/FormInputPart";
+import {useRegisterForm} from "../../Services/utils/hooks/useRegisterForm";
+import {FormSelectPart} from "../common/FormSelectPart/FormSelectPart";
 import {validateRegisterRule} from "./ValidateRegisterRule";
+import {useFetch} from "../../Services/utils/fetch";
 
 export const optionsProvinceSelect = ['dolnośląskie', 'kujawsko-pomorskie', 'lubelskie', 'lubuskie', 'łódzkie', 'małopolskie', 'mazowieckie', 'opolskie', 'podkarpackie', 'podlaskie', 'pomorskie', 'śląskie', 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie', 'zachodniopomorskie'];
 export const optionsSexSelect = ['male', 'female'];
@@ -12,8 +13,25 @@ export const optionsAccountSelect = ['public', 'private'];
 export const RegisterForm = () => {
     const {helpMessage, correct, registerFormData, setRegisterFormData} = useRegisterForm(validateRegisterRule) ;
 
+    const checkCorrectForm = ():boolean =>{
+        const arrCorrect = Object.entries(correct)
+        arrCorrect.forEach((item)=>{
+            if(!item[1]){
+                return false;
+            }
+        })
+       return true
+    }
+
     const sendRegisterForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if(checkCorrectForm()){
+            const res = useFetch("POST","register",registerFormData)
+                //@TODO add info after register successfully
+        }else{
+            //@TODO writing code responsible for incorrect data in register form
+        }
     };
 
     return (
