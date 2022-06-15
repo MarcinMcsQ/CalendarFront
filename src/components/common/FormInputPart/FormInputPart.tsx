@@ -8,13 +8,13 @@ type Props = {
     type: string;
     helpMessage: string;
     placeholder: string;
-    correct: boolean;
+    correct: boolean | null;
 }
 
 export const FormInputPart = (props: Props) => {
 
     return (
-        <div className={`form-input-part ${props.value !== 'select' && props.value !== '' ?
+        <div className={`form-input-part ${props.value !== 'select' && props.value !== '' && props.correct !== null?
             (props.correct ? "form-input-part--correct" : "form-input-part--incorrect") : ""}`}>
             <input
                 name={props.name}

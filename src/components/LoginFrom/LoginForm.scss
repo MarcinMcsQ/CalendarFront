@@ -1,28 +1,27 @@
 @import "../../Assets/cssVariable";
 
-.register-form {
+.login-form {
   text-align: center;
-
-  .register-form__box {
+  min-height: 80vh;
+  .login-form__box {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px solid #F2CA0F;
-    min-height: 75%;
+    height: 100%;
     width: 100%;
     background-color: $bgBoxColor;
 
-    .register-form-box__button {
+    .login-form-box__button {
       border-radius: 10px;
       font-size: 15px;
       height: 30px;
       width: 45%;
       margin: 20px;
-      background-color: $bgButtonColorHover;
+      background-color: $inputCorrectColor;
       transition: 0.3s;
-
       &:hover {
-        background-color: $bgButtonColor;
+        background-color: $greenColor;
       }
     }
   }

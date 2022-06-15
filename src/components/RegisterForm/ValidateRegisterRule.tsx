@@ -1,6 +1,6 @@
 import React from "react";
 import {RegisterFormDataCorrect, RegisterFormUserData, RegisterFormDataHelpMessage} from "types";
-import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect} from "./RegisterForm";
+import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect} from "types";
 
 export const validateRegisterRule = (
     data: RegisterFormUserData,

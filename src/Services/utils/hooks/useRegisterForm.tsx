@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {RegisterFormDataCorrect, RegisterFormDataHelpMessage, RegisterFormUserData} from "types";
-import {validateRegisterRule} from "../../../components/RegisterForm/ValidateRegisterRule";
+// import {validateRegisterRule} from "../../../components/RegisterForm/ValidateRegisterRule";
 
-export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>, callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>>) => void) =>
+export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>, callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>>)  => void) =>
 {
     const [message, setMessage] = useState({
         nick: '',
@@ -47,13 +47,13 @@ export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, c
     };
 
     useEffect(()=>{
-        validateRegisterRule(registerFormData , setCorrect , setMessage  )
+        validateCallback(registerFormData , setCorrect , setMessage  )
     },[registerFormData])
 
     return {
-        helpMessage: message,
-        correct: correct,
         registerFormData: registerFormData,
+        correct: correct,
+        helpMessage: message,
         setRegisterFormData: changedHandle
     }
 }
