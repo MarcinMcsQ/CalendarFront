@@ -1,12 +1,12 @@
 import React from "react";
-import {Home} from "../components/Home/Home";
 import {Footer} from "../components/common/Footer/Footer";
 import {Header} from "../components/common/Header/Header";
+import {CalendarMain} from "../components/CalendarMain/CalendarMain";
 
-export const HomeView = () =>(
+export const CalendarView= () =>(
     <>
         <Header/>
-        <Home/>
+        <CalendarMain/>
         <Footer/>
     </>
 )
