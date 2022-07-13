@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {RegisterFormDataCorrect, RegisterFormDataHelpMessage, RegisterFormUserData} from "types";
+import {RegisterFormDataCorrect, RegisterFormDataHelpMessage, RegisterFormUserDataFront} from "types";
 // import {validateRegisterRule} from "../../../components/RegisterForm/ValidateRegisterRule";
 
-export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, callbackCorrect: React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>, callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>>)  => void) =>
+export const useRegisterForm = (validateCallback: (data: RegisterFormUserDataFront, callbackCorrect: React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>, callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>>)  => void) =>
 {
     const [message, setMessage] = useState({
         nick: '',
@@ -26,7 +26,7 @@ export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, c
         password1: false,
         password2: false
     })
-    const [registerFormData, setRegisterFormData] = useState<RegisterFormUserData>({
+    const [registerFormData, setRegisterFormData] = useState<RegisterFormUserDataFront>({
         nick: '',
         name: '',
         email: '',
@@ -40,7 +40,7 @@ export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, c
 
 
     const changedHandle = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        return setRegisterFormData((registerParams: RegisterFormUserData) => ({
+        return setRegisterFormData((registerParams: RegisterFormUserDataFront) => ({
             ...registerParams,
             [e.target.name]: e.target.value,
         }));
@@ -48,7 +48,7 @@ export const useRegisterForm = (validateCallback: (data: RegisterFormUserData, c
 
     useEffect(()=>{
         validateCallback(registerFormData , setCorrect , setMessage  )
-    },[registerFormData])
+    },[registerFormData,validateCallback])
 
     return {
         registerFormData: registerFormData,

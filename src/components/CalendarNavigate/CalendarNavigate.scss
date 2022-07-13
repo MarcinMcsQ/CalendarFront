@@ -1,0 +1,29 @@
+@import "../../Assets/cssVariable";
+
+.calendar-navigate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 5vw;
+
+  button{
+    display: block;
+    font-size: 30px;
+  }
+  height: 100%;
+  .calendar-navigate__button-up{
+    width: 5vw;
+
+  }
+  .calendar-navigate__button-current{
+    height: 5vw;
+    width: 50vh;
+    transform: rotate(-90deg);
+
+  }
+  .calendar-navigate__button-down{
+    width: 5vw;
+
+  }
+}

@@ -1,9 +1,11 @@
 import React from "react";
-import {RegisterFormDataCorrect, RegisterFormUserData, RegisterFormDataHelpMessage} from "types";
-import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect} from "types";
+import {RegisterFormDataCorrect,RegisterFormUserDataFront,optionsProvinceSelect, optionsSexSelect, optionsAccountSelect, RegisterFormDataHelpMessage} from "types";
+
+
+
 
 export const validateRegisterRule = (
-    data: RegisterFormUserData,
+    data: RegisterFormUserDataFront,
     callbackCorrect:React.Dispatch<React.SetStateAction<RegisterFormDataCorrect>>,
     callbackMessage: React.Dispatch<React.SetStateAction<RegisterFormDataHelpMessage>> ) : void => {
     // Nick...
@@ -12,7 +14,7 @@ export const validateRegisterRule = (
             ...prev,
             nick:''
         }))
-    }else if(data.nick.length >= 4 ){
+    }else if(data.nick.length >= 4 && data.nick.length <= 50 ){
         callbackCorrect((prev)=>({
             ...prev,
             nick:true,
@@ -21,7 +23,16 @@ export const validateRegisterRule = (
             ...prev,
             nick:''
         }))
-    }else{
+    }else if(data.nick.length > 50 ) {
+        callbackCorrect((prev)=>({
+            ...prev,
+            nick:false,
+        }))
+        callbackMessage((prev)=>({
+            ...prev,
+            nick:'Your nick should have max 50 characters'
+        }))
+    } else{
         callbackCorrect((prev )=>({
             ...prev,
             nick: false
@@ -31,6 +42,7 @@ export const validateRegisterRule = (
             nick:'Your nick should have min 4 characters'
         }))
     }
+
     // Name...
     if(data.name.length === 0){
         callbackMessage((prev)=>({
@@ -116,7 +128,7 @@ export const validateRegisterRule = (
             sex:''
         }))
 
-    }else if(data.sex==='select'){
+    }else if(data.sex === 'select'){
         callbackMessage((prev)=>({
             ...prev,
             sex:'Select your sex'
@@ -125,7 +137,7 @@ export const validateRegisterRule = (
             ...prev,
             sex:false,
         }))
-    }else if(optionsSexSelect.includes(data.sex)){
+    }else if(optionsSexSelect.includes(data.sex.toString())){
         callbackMessage((prev)=>({
             ...prev,
             sex:''
@@ -159,7 +171,7 @@ export const validateRegisterRule = (
             ...prev,
             accountPublic:false,
         }))
-    }else if(optionsAccountSelect.includes(data.accountPublic)){
+    }else if(optionsAccountSelect.includes(data.accountPublic.toString())){
         callbackMessage((prev)=>({
             ...prev,
             accountPublic:''
@@ -193,7 +205,7 @@ export const validateRegisterRule = (
             ...prev,
             province:false,
         }))
-    }else if(optionsProvinceSelect.includes(data.province)){
+    }else if(optionsProvinceSelect.includes(data.province.toString())){
         callbackMessage((prev)=>({
             ...prev,
             province:''

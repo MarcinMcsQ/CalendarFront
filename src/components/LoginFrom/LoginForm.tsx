@@ -1,17 +1,71 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {FormInputPart} from "../common/FormInputPart/FormInputPart";
 import {useLoginForm} from "../../Services/utils/hooks/useLoginForm";
+import {LoginResponse , GetAllTasksResponse , TaskFormData} from 'types'
 import './LoginForm.scss'
+import {fetchFunc} from "../../Services/utils/fetch";
+import {CONFIG} from "../../config/config";
+import {InformationBox} from "../common/InformationBox/InformationBox";
+import {useNavigate} from "react-router-dom";
+import {Context} from "../context/context";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState, store} from "../../redux-toolkit/store";
+import {setHistory, clearHistory} from "../../redux-toolkit/features/task-history/task-history-slice";
+
+
+// const navigate = useNavigate()
+//
+// // const [user, setUser] = useState<boolean>(false)
+//
+// const logOut = () => {
+//     //@TODO fetch logout to server
+//     // setUser(state => !state)
+//     user = false;
+//     navigate("/")
+// }
+//
+//
+// const logIn = () => {
+//     // setUser(state => !state)
+//     user = true;
+//     navigate("/calendar")
+//
+// }
+
 
 export const LoginForm = () => {
+    const context = useContext(Context);
+    const dispatch = useDispatch();
+    const taskHistory = useSelector((store:RootState) => store.taskHistory)
+    const navigate = useNavigate()
+    const {message, correct, setCorrect, setMessage, loginFormData, setLoginFormData} = useLoginForm();
 
-    const {helpMessage, correct,setMessage, loginFormData, setLoginFormData} = useLoginForm();
-
-    const sendLoginForm = () =>{
-        //@TODO implement send loginForm data
+    const logIn = () => {
+        context.userLogged.setLogged(true)
+        navigate("/calendar")
     }
 
-    return(
+    const validationRes = async (res: boolean) => {
+        if (!res) {
+            setMessage((i) => ({loginMessage: 'Email or password incorrect'}));
+            setCorrect((i) => ({loginData: false}));
+        } else {
+            setMessage((i) => ({loginMessage: ''}));
+            setCorrect((i) => ({loginData: true}));
+            const res = (await fetchFunc(CONFIG.domain, CONFIG.port, 'task', 'GET', '')) as GetAllTasksResponse;
+            dispatch(setHistory(res.tasks))
+            logIn()
+        }
+    }
+
+    const sendLoginForm = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const res = (await fetchFunc(CONFIG.domain, CONFIG.port, 'auth/login', 'POST', loginFormData)) as LoginResponse;
+        validationRes(res.success);
+    }
+
+
+    return (
         <>
             <form className="login-form" onSubmit={sendLoginForm}>
                 <h2>Login form</h2>
@@ -23,7 +77,9 @@ export const LoginForm = () => {
                         helpMessage={''}
                         correct={correct.loginData}
                         type={'text'}
-                        placeholder={"email"}/>
+                        placeholder={"email"}
+                        helper={true}
+                    />
                     <FormInputPart
                         name="password"
                         changeHandle={setLoginFormData}
@@ -31,10 +87,14 @@ export const LoginForm = () => {
                         helpMessage={''}
                         correct={correct.loginData}
                         type={'password'}
-                        placeholder={"password"}/>
+                        placeholder={"password"}
+                        helper={true}
+                    />
                     <button className="login-form-box__button" type="submit">Login</button>
                 </div>
+                <InformationBox message={message.loginMessage} positive={correct.loginData}/>
             </form>
+
         </>
     )
 }

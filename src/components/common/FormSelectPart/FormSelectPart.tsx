@@ -1,8 +1,9 @@
 import React from "react";
 import "./FormSelectPart.scss"
+import {OptionsAccountSelect,OptionsSexSelect ,OptionsProvinceSelect} from 'types'
 
 type Props = {
-    value: string;
+    value: '' | 'select' | OptionsSexSelect  | OptionsProvinceSelect | OptionsAccountSelect;
     name: string;
     options: string[];
     changeHandle: React.ChangeEventHandler<HTMLSelectElement>

@@ -1,10 +1,10 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React from "react";
 import "./RegisterForm.scss"
 import {FormInputPart} from "../common/FormInputPart/FormInputPart";
 import {useRegisterForm} from "../../Services/utils/hooks/useRegisterForm";
 import {FormSelectPart} from "../common/FormSelectPart/FormSelectPart";
 import {validateRegisterRule} from "./ValidateRegisterRule";
-import {useFetch} from "../../Services/utils/fetch";
+import {fetchFunc} from "../../Services/utils/fetch";
 import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect} from "types";
 
 
@@ -26,7 +26,7 @@ export const RegisterForm = () => {
         e.preventDefault();
 
         if(checkCorrectForm()){
-            const res = useFetch("POST","register",registerFormData)
+            // const res = fetchFunc("POST","register",registerFormData)
                 //@TODO add info after register successfully
         }else{
             //@TODO writing code responsible for incorrect data in register form

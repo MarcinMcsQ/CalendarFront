@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {LoginFormData} from "types"
+import {isBoolean} from "util";
 
 export const useLoginForm = () => {
 
@@ -7,7 +8,7 @@ export const useLoginForm = () => {
         loginMessage:'',
     })
 
-    const [correct, setCorrect] = useState({
+    const [correct, setCorrect] = useState<{loginData:null | boolean}>({
        loginData:null,
     })
     const [loginFormData,setLoginFormData] = useState({
@@ -23,7 +24,7 @@ export const useLoginForm = () => {
     };
 
     return {
-        helpMessage:message,
+        message,
         setMessage,
         loginFormData,
         correct,

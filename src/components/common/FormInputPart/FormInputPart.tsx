@@ -4,18 +4,20 @@ import "./FormInputPart.scss"
 type Props = {
     name: string;
     changeHandle: React.ChangeEventHandler<HTMLInputElement>;
-    value: string | boolean;
+    value: string | boolean | Date;
     type: string;
     helpMessage: string;
     placeholder: string;
     correct: boolean | null;
+    helper?:boolean;
 }
 
 export const FormInputPart = (props: Props) => {
 
     return (
-        <div className={`form-input-part ${props.value !== 'select' && props.value !== '' && props.correct !== null?
-            (props.correct ? "form-input-part--correct" : "form-input-part--incorrect") : ""}`}>
+        <div className={`form-input-part 
+        ${ props.helper ? null : (props.value !== 'select' && props.value !== '' && props.correct !== null?
+            (props.correct ? "form-input-part--correct" : "form-input-part--incorrect") : "") }`}>
             <input
                 name={props.name}
                 onChange={props.changeHandle}
