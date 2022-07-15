@@ -51,8 +51,6 @@ export const fetchFunc = async (domain: string, port: string, address: string, m
 
     }
 
-    return await (await fetch(`http://${domain}:${port}/${address}`, optionsFunc(method)
-
-    )).json();
+    return await (await fetch(`http://${domain}:${port}/${address}`, optionsFunc(method))).json();
 }
 

@@ -13,25 +13,6 @@ import {RootState, store} from "../../redux-toolkit/store";
 import {setHistory, clearHistory} from "../../redux-toolkit/features/task-history/task-history-slice";
 
 
-// const navigate = useNavigate()
-//
-// // const [user, setUser] = useState<boolean>(false)
-//
-// const logOut = () => {
-//     //@TODO fetch logout to server
-//     // setUser(state => !state)
-//     user = false;
-//     navigate("/")
-// }
-//
-//
-// const logIn = () => {
-//     // setUser(state => !state)
-//     user = true;
-//     navigate("/calendar")
-//
-// }
-
 
 export const LoginForm = () => {
     const context = useContext(Context);
@@ -41,8 +22,7 @@ export const LoginForm = () => {
     const {message, correct, setCorrect, setMessage, loginFormData, setLoginFormData} = useLoginForm();
 
     const logIn = () => {
-        context.userLogged.setLogged(true)
-        navigate("/calendar")
+       context.userLogged.setLogged(()=>true)
     }
 
     const validationRes = async (res: boolean) => {
@@ -54,7 +34,7 @@ export const LoginForm = () => {
             setCorrect((i) => ({loginData: true}));
             const res = (await fetchFunc(CONFIG.domain, CONFIG.port, 'task', 'GET', '')) as GetAllTasksResponse;
             dispatch(setHistory(res.tasks))
-            logIn()
+            if(res.success) logIn();
         }
     }
 
@@ -63,6 +43,11 @@ export const LoginForm = () => {
         const res = (await fetchFunc(CONFIG.domain, CONFIG.port, 'auth/login', 'POST', loginFormData)) as LoginResponse;
         validationRes(res.success);
     }
+
+
+    useEffect(()=>{
+        if(context.userLogged.logged) navigate("/calendar")
+    },[context.userLogged.logged])
 
 
     return (

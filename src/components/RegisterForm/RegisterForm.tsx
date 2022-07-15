@@ -1,37 +1,45 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./RegisterForm.scss"
 import {FormInputPart} from "../common/FormInputPart/FormInputPart";
 import {useRegisterForm} from "../../Services/utils/hooks/useRegisterForm";
 import {FormSelectPart} from "../common/FormSelectPart/FormSelectPart";
 import {validateRegisterRule} from "./ValidateRegisterRule";
 import {fetchFunc} from "../../Services/utils/fetch";
-import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect} from "types";
-
+import {optionsAccountSelect, optionsProvinceSelect, optionsSexSelect, RegisterResponse} from "types";
+import {CONFIG} from "../../config/config";
+import {InformationBox} from "../common/InformationBox/InformationBox";
 
 
 export const RegisterForm = () => {
-    const {helpMessage, correct, registerFormData, setRegisterFormData} = useRegisterForm(validateRegisterRule) ;
+    const {helpMessage, correct, registerFormData, setRegisterFormData} = useRegisterForm(validateRegisterRule);
+    const [resCode, setResCode] = useState<null | boolean>(null);
+    const [ownCode, setOwnCode] = useState<null | boolean>(null)
 
-    const checkCorrectForm = ():boolean =>{
+    const checkCorrectForm = (): boolean => {
         const arrCorrect = Object.entries(correct)
-        arrCorrect.forEach((item)=>{
-            if(!item[1]){
+        for (let i = 0; i < arrCorrect.length; i++) {
+            if (!arrCorrect[i][1]) {
                 return false;
             }
-        })
-       return true
+        }
+        return true
     }
 
     const sendRegisterForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if(checkCorrectForm()){
-            // const res = fetchFunc("POST","register",registerFormData)
-                //@TODO add info after register successfully
-        }else{
-            //@TODO writing code responsible for incorrect data in register form
+        if (checkCorrectForm()) {
+            const res = (await fetchFunc(CONFIG.domain, CONFIG.port, 'user/register', 'POST', registerFormData)) as RegisterResponse;
+            setResCode(() => res.success);
+            setOwnCode(()=>null)
+        } else {
+           setOwnCode(()=>true)
         }
     };
+
+    useEffect(() => {
+
+    }, [resCode])
 
     return (
         <>
@@ -114,6 +122,9 @@ export const RegisterForm = () => {
                         correct={correct.password2}
                         type={'password'}
                         placeholder={"Repeat password"}/>
+                    {ownCode === true ? <InformationBox message={'Check your form'} positive={false}/> : null}
+                    {resCode ? <InformationBox message={'Register success'} positive={true}/>
+                        : <InformationBox message={'Email exist'} positive={resCode}/>}
                     <button className="register-form-box__button" type="submit">Register</button>
                 </div>
             </form>

@@ -1,0 +1,57 @@
+.custom{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 14%;
+  height: 19%;
+  position: relative;
+  overflow:hidden;
+
+
+
+  .day__p-date{
+   position:absolute;
+   font-size: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   color: white;
+   z-index:0;
+ }
+}
+
+.day{
+  border: 1px solid red;
+  overflow-y: auto;
+
+}
+.current-day{
+  background-color: #F2CA0F;
+  border: 1px solid green;
+  overflow-y: auto;
+}
+.sun{
+  background-color: lightgreen;
+  border: 1px solid green;
+}
+.blank-day{
+  border: 1px solid transparent;
+}
+
+.day__button{
+  width: 60%;
+  font-size: 25px;
+  line-height: 25%;
+  min-height: 15px;
+  height: 25%;
+  border: 2px solid #4782ea;
+  border-radius: 20px;
+  transition: 0.3s;
+  z-index:1;
+  &:hover{
+    background-color: yellowgreen;
+  }
+}
+
+
+
+

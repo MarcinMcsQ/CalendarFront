@@ -1,33 +1,33 @@
-import React, {createContext} from "react";
+import React, {createContext, Dispatch} from "react";
 import { TaskType,taskType } from "types";
 
 interface ContextType {
     currentDate:{
         currentDate:Date ;
-        setCurrentDate:(date:Date)=>void;
+        setCurrentDate:Dispatch<React.SetStateAction<Date>> ;
     },
     taskType:{
         showedTypeOfTask:TaskType ;
-        setShowedTypeOfTask:(taskType:TaskType)=>void;
+        setShowedTypeOfTask:Dispatch<React.SetStateAction<TaskType>> ;
     },
     userLogged:{
         logged:boolean ;
-        setLogged:(logged:boolean)=>void;
+        setLogged: Dispatch<React.SetStateAction<boolean>> ;
     }
 }
 
 export const Context = createContext<ContextType>({
     currentDate:{
         currentDate:new Date() ,
-        setCurrentDate:(date:Date)=>{}
+        setCurrentDate:()=>{}
     },
     taskType:{
         showedTypeOfTask:taskType.all ,
-        setShowedTypeOfTask:(taskType:TaskType)=>{},
+        setShowedTypeOfTask:()=>{},
     },
     userLogged:{
         logged:false,
-        setLogged:(logged:boolean)=>{},
+        setLogged:()=>{},
     }
 })
 

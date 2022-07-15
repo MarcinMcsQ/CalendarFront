@@ -10,7 +10,10 @@ export const InformationBox = (props:Props) => {
 
     return(
         props.positive === null ? null :
-          <div className='information-box' style={{border:`2px solid ${props.positive ? 'green' : 'red'}`}}>
+          <div className='information-box' style={{
+              border:`2px solid ${props.positive ? 'green' : 'red'}`,
+              backgroundColor:` ${props.positive ? 'lightgreen' : 'lightcoral'}`
+          }}>
                 <p>{props.message}</p>
           </div>
     )

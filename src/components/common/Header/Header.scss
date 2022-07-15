@@ -12,14 +12,26 @@
 
 .header__button-box  {
   display: flex;
-  border: solid 1px #8B0000;
-  width: 160px;
+  padding: 5px;
+  border: solid 1px white;
+  min-width: 160px;
+  justify-content: space-between;
 }
 .header__button-box a {
+  color: wheat;
   display: block;
+  border-right: 2px solid white;
+  padding: 2px;
   text-decoration: none;
   width: 80px;
   text-align: center;
+  &:last-child{
+    border-right: none;
+  }
+}
+.header__button-box__btn-logout{
+
+  width: 60px;
 }
 
 // mobile device

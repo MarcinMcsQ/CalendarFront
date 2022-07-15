@@ -94,8 +94,6 @@ export const validateRegisterRule = (
     const selectDate = new Date(data.dateOfBirth)
     const currentDate = new Date()
 
-    console.log(selectDate.getTime()>currentDate.getTime())
-
 
     if(data.dateOfBirth===''){
         callbackMessage((prev)=>({
